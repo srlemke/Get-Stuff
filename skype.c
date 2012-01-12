@@ -26,18 +26,18 @@ int uninstall_skype()
 int install_skype()
 {
 	uninstall_skype();
-	arch();
+
+	if ((arch() == 1)){
+		printf ("You are on a 64bit system, so, additional dependencies are requested (only2)\n");
+		printf ("Be sure you have the Main32 media enabled! If they are, press ok:\n");
+		system ("edit-urpm-sources.pl –expert");
+		system ("urpmi libxscrnsaver1 libxv1 libxrender1 libXrandr2 libfreetype6 libfontconfig1 libglib2.0_0");
+	}
 
 	chdir ("/opt");
 	unlink ("skype_static-"VERSION".tar.bz2");
 	
-	//Check if wget is present//
-	FILE *wget = fopen("/usr/bin/wget","r");
-	if (!wget){
-		system("urpmi wget");
-	}
-	/////////////////////////////
-	
+	wget();
 	system ("wget http://download.skype.com/linux/skype_static-"VERSION".tar.bz2");
 	printf ("Downloading skype into /opt...\n");
 	system ("tar -jxvf /opt/skype_static-"VERSION".tar.bz2");

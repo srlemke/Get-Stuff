@@ -7,7 +7,6 @@
 #include <sys/utsname.h>
 #include "common.h"
 
-
 int recursive_delete(char* dirname) {
 	DIR *dp;
 	struct dirent *ep;
@@ -46,16 +45,22 @@ int recursive_delete(char* dirname) {
 
 }
 
-void arch()
+int arch()
 {
 	struct utsname un;
 	uname(&un);
-
 	if (!strcmp(un.machine, "x86_64")){
-		printf ("You are on a 64bit system, so, additional dependencies are requested (only2)\n");
-		printf ("Be sure you have the Main32 media enabled! If they are, press ok:\n");
-		system ("edit-urpm-sources.pl –expert");
-		system ("urpmi libxscrnsaver1 libxv1 libxrender1 libXrandr2 libfreetype6 libfontconfig1 libglib2.0_0");
+		return 1;
+	}else{
+		return 0;
 	}
 }
 
+//Check for wget//
+void wget()
+{
+	FILE *wget = fopen("/usr/bin/wget","r");
+	if (!wget){
+		system("urpmi wget");
+	}
+}
