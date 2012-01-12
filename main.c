@@ -94,10 +94,10 @@ int main( int argc, char **argv)
 	
 	//////////// Funcoes aos botoes quando clicados///////////
 	g_signal_connect(install_button, "clicked", 	
-			G_CALLBACK(install), NULL);
+			G_CALLBACK(install_skype), NULL);
 
 	g_signal_connect(erase_button, "clicked", 
-			G_CALLBACK(erase), NULL);
+			G_CALLBACK(uninstall_skype), NULL);
 
 	g_signal_connect(quit_button, "clicked",
 			G_CALLBACK(gtk_main_quit), G_OBJECT(janela));

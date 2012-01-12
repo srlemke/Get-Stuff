@@ -6,7 +6,7 @@
 
 #define VERSION "2.2.0.35"
 
-int erase()
+int uninstall_skype()
 {
 	chdir ("/opt");
 	unlink ("skype_static-"VERSION);
@@ -23,9 +23,9 @@ int erase()
 	return 0;
 }
 
-int install()
+int install_skype()
 {
-	erase();
+	uninstall_skype();
 	arch();
 
 	chdir ("/opt");
