@@ -49,11 +49,7 @@ int arch()
 {
 	struct utsname un;
 	uname(&un);
-	if (!strcmp(un.machine, "x86_64")){
-		return 1;
-	}else{
-		return 0;
-	}
+	return (!strcmp(un.machine, "x86_64"));
 }
 
 //Check for wget//
