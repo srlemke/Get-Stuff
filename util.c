@@ -37,9 +37,6 @@ int recursive_delete(char* dirname) {
 		}
 		(void) closedir (dp);
 	}
-	else
-		perror ("Couldn't open the directory");
-
 	remove(dirname);
 	return 0;
 
