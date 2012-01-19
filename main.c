@@ -29,6 +29,8 @@ int main( int argc, char **argv)
 	GtkWidget *choice_box;
 	GtkWidget *extras0, *install_skype_button, *uninstall_skype_button;
 	GtkWidget *extras1, *install_flash_button, *uninstall_flash_button;
+	GtkWidget *extras2, *install_codecs_button, *uninstall_codecs_button;
+
 	GtkWidget *quit_button;
 
 	///// The master window ////////////
@@ -43,6 +45,7 @@ int main( int argc, char **argv)
 	choice_box = gtk_vbox_new(TRUE, 7);
 	extras0 = gtk_hbox_new(TRUE, 7);
 	extras1 = gtk_hbox_new(TRUE, 7);
+	extras2 = gtk_hbox_new(TRUE, 7);
 	label = gtk_label_new("Select an option or press Quit");
 	////////////////////////////////////////
 	
@@ -57,6 +60,7 @@ int main( int argc, char **argv)
 	/////// Adds horizontal boxes with buttons to the choice_box //////
 	gtk_container_add(GTK_CONTAINER(choice_box), extras0);
 	gtk_container_add(GTK_CONTAINER(choice_box), extras1);
+	gtk_container_add(GTK_CONTAINER(choice_box), extras2);
 //	gtk_container_add(GTK_CONTAINER(choice_box), quit_button);
 
 	///// Create the buttons/////////////////
@@ -74,6 +78,12 @@ int main( int argc, char **argv)
 	
 	uninstall_flash_button = gtk_button_new_with_label("Uninstall Flash");
 	gtk_box_pack_start (GTK_BOX (extras1), uninstall_flash_button, TRUE, TRUE, 15);
+
+	install_codecs_button = gtk_button_new_with_label("Install Codecs");
+	gtk_box_pack_start (GTK_BOX (extras2), install_codecs_button, TRUE, TRUE, 15);
+	
+	uninstall_codecs_button = gtk_button_new_with_label("Uninstall Codecs");
+	gtk_box_pack_start (GTK_BOX (extras2), uninstall_codecs_button, TRUE, TRUE, 15);
 	///// end of button creation///////////
 
 	//////// Show the master_window and all its babies//////
