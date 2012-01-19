@@ -26,7 +26,7 @@ int install_skype()
 {
 	uninstall_skype();
 
-	if ((arch() == 1)){// if arch is 64bit
+	if (arch()){// if arch is 64bit
 		system ("edit-urpm-sources.pl --expert"); //tel user to enable 32bit medias
 		system ("urpmi libxscrnsaver1 libxv1 libxrender1 libXrandr2 libfreetype6 libfontconfig1 libglib2.0_0");
 	}
