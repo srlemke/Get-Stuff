@@ -3,7 +3,7 @@ CFLAGS	= -g -O0 -Wall `pkg-config gtk+-2.0 --cflags`
 LD	= gcc
 LDFLAGS	=
 LIBS	= `pkg-config gtk+-2.0 --libs`
-BIN	= get_skype
+BIN	= get_stuff
 OBJS	= skype.o util.o main.o flash.o
 
 .c.o:
