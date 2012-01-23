@@ -14,17 +14,29 @@ GdkPixbuf *create_pixbuf(const gchar * filename)
 		fprintf(stderr, "%s\n", error->message);
 		g_error_free(error);
 	}
-
 	return pixbuf;
 }
 
 int main( int argc, char **argv)
-{
-	if(getuid()== 0)
+{	
+	gtk_init(&argc, &argv);
+
+	if(getuid()!=0)
 	{
+		GtkWidget *janela, *dialog;
 
-		gtk_init(&argc, &argv);
+		janela = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+		gtk_window_set_icon(GTK_WINDOW(janela), create_pixbuf("/usr/share/icons/mandriva.png"));
 
+		dialog = gtk_message_dialog_new(GTK_WINDOW(janela),
+				GTK_DIALOG_DESTROY_WITH_PARENT,
+				GTK_MESSAGE_WARNING,
+				GTK_BUTTONS_OK,
+				"Please, run this as root user.");
+		gtk_window_set_title(GTK_WINDOW(dialog), "Warning:");
+		gtk_dialog_run(GTK_DIALOG(dialog));
+		gtk_widget_destroy(dialog);
+	}else{
 		GtkWidget *janela, *label;
 		GtkWidget *choice_box;
 		GtkWidget *extras0, *install_skype_button, *uninstall_skype_button;
@@ -115,24 +127,6 @@ int main( int argc, char **argv)
 		////////////////////////////////////////////////////////////////
 
 		gtk_main();
-
-	}else{
-		gtk_init(&argc, &argv);
-
-		GtkWidget *dialog, *janela;
-
-		janela = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-		gtk_window_set_icon(GTK_WINDOW(janela), create_pixbuf("/usr/share/icons/mandriva.png"));
-
-		dialog = gtk_message_dialog_new(GTK_WINDOW(janela),
-				GTK_DIALOG_DESTROY_WITH_PARENT,
-				GTK_MESSAGE_WARNING,
-				GTK_BUTTONS_OK,
-				"Please, run this as root user.");
-		gtk_window_set_title(GTK_WINDOW(dialog), "Warning:");
-		gtk_dialog_run(GTK_DIALOG(dialog));
-		gtk_widget_destroy(dialog);	
 	}
 	return 0;
 }
-
