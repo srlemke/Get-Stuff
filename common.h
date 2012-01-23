@@ -7,4 +7,4 @@ int uninstall_flash(void);
 int recursive_delete(char *);
 int arch(void);
 void wget(void);
-
+int skype(void);

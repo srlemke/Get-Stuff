@@ -79,7 +79,12 @@ int main( int argc, char **argv)
 		install_skype_button = gtk_button_new_with_label("Install Skype");
 		gtk_box_pack_start (GTK_BOX (extras0), install_skype_button, 0, 1, 20);
 
-		uninstall_skype_button = gtk_button_new_with_label("Uninstall Skype");
+		if(skype()){
+			uninstall_skype_button = gtk_button_new_with_label("existe!");
+		}else{
+			uninstall_skype_button = gtk_button_new_with_label("Nao existe!");
+		}
+		
 		gtk_box_pack_start (GTK_BOX (extras0), uninstall_skype_button, 0, 1, 20);
 
 		install_flash_button = gtk_button_new_with_label("Install Flash");
@@ -95,7 +100,6 @@ int main( int argc, char **argv)
 		gtk_box_pack_start (GTK_BOX (extras2), uninstall_codecs_button, 0, 1, 20);
 
 		quit_button = gtk_button_new_with_label("Quit");
-		//	gtk_widget_set_size_request(quit_button, 0,0);
 		gtk_box_pack_start (GTK_BOX (extras3), quit_button, 0, 0, 0);
 
 		///// end of button creation///////////

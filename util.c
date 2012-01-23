@@ -57,3 +57,13 @@ void wget()
 		system("urpmi wget");
 	}
 }
+
+int skype()
+{
+	FILE *skype= fopen("/usr/bin/skype","r");
+	if(!(skype)){
+		return 1;
+	}else{
+		return 0;
+	}
+}
