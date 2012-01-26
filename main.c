@@ -21,6 +21,8 @@ int main( int argc, char **argv)
 {	
 	gtk_init(&argc, &argv);
 
+	int skype_status, flash_status;
+
 	if(getuid()!=0)
 	{
 		GtkWidget *janela, *dialog;
@@ -39,8 +41,8 @@ int main( int argc, char **argv)
 	}else{
 		GtkWidget *janela, *label;
 		GtkWidget *choice_box;
-		GtkWidget *extras0, *install_skype_button, *uninstall_skype_button;
-		GtkWidget *extras1, *install_flash_button, *uninstall_flash_button;
+		GtkWidget *extras0, *skype_button;
+		GtkWidget *extras1, *flash_button;
 		GtkWidget *extras2, *install_codecs_button, *uninstall_codecs_button;
 		GtkWidget *extras3, *quit_button;
 
@@ -76,22 +78,28 @@ int main( int argc, char **argv)
 
 		///// Create the buttons/////////////////
 
-		install_skype_button = gtk_button_new_with_label("Install Skype");
-		gtk_box_pack_start (GTK_BOX (extras0), install_skype_button, 0, 1, 20);
+		//install_skype_button = gtk_button_new_with_label("Install Skype");
+		//gtk_box_pack_start (GTK_BOX (extras0), install_skype_button, 0, 1, 20);
+
 
 		if(skype()){
-			uninstall_skype_button = gtk_button_new_with_label("existe!");
+			skype_button = gtk_button_new_with_label("uninstall skype!");
+			skype_status = 0;
 		}else{
-			uninstall_skype_button = gtk_button_new_with_label("Nao existe!");
+			skype_button = gtk_button_new_with_label("install skype!");
+			skype_status = 1;
 		}
-		
-		gtk_box_pack_start (GTK_BOX (extras0), uninstall_skype_button, 0, 1, 20);
+		gtk_box_pack_start (GTK_BOX (extras0), skype_button, 0, 1, 20);
 
-		install_flash_button = gtk_button_new_with_label("Install Flash");
-		gtk_box_pack_start (GTK_BOX (extras1), install_flash_button, 0, 1, 20);
+		if(flash()){
+			flash_button = gtk_button_new_with_label("uninstall flash!");
+			flash_status = 0;
+		}else{
+			flash_button = gtk_button_new_with_label("install flash!");
+			flash_status = 1;
+		}
 
-		uninstall_flash_button = gtk_button_new_with_label("Uninstall Flash");
-		gtk_box_pack_start (GTK_BOX (extras1), uninstall_flash_button, 0, 1, 20);
+		gtk_box_pack_start (GTK_BOX (extras1), flash_button, 0, 1, 20);
 
 		install_codecs_button = gtk_button_new_with_label("Install Codecs");
 		gtk_box_pack_start (GTK_BOX (extras2), install_codecs_button, 0, 1, 20);
@@ -109,17 +117,26 @@ int main( int argc, char **argv)
 		////////////
 
 		//////////// Funtions to buttons when they are clicked///////////
-		g_signal_connect(install_skype_button, "clicked", 	
-				G_CALLBACK(install_skype), NULL);
-
-		g_signal_connect(uninstall_skype_button, "clicked", 
-				G_CALLBACK(uninstall_skype), NULL);
-
-		g_signal_connect(install_flash_button, "clicked", 	
-				G_CALLBACK(install_flash), NULL);
-
-		g_signal_connect(uninstall_flash_button, "clicked", 
-				G_CALLBACK(uninstall_flash), NULL);
+		if(skype_status == 1){
+			(g_signal_connect(skype_button, "clicked",
+					  G_CALLBACK(install_skype), NULL));
+				gtk_label_set_text(GTK_LABEL(skype_button), "Uninstall Skype");
+		}else{
+			(g_signal_connect(skype_button, "clicked",
+					  G_CALLBACK(uninstall_skype), NULL));
+				gtk_label_set_text(GTK_LABEL(skype_button), "Install Skype");
+		}
+		
+		if(flash_status == 1){
+			(g_signal_connect(flash_button, "clicked",
+					  G_CALLBACK(install_flash), NULL));
+				gtk_label_set_text(GTK_LABEL(flash_button), "Uninstall Flash");
+		}else{
+			(g_signal_connect(flash_button, "clicked",
+					  G_CALLBACK(uninstall_flash), NULL));
+				gtk_label_set_text(GTK_LABEL(flash_button), "Install Flash");
+		}
+		
 
 		g_signal_connect(quit_button, "clicked",
 				G_CALLBACK(gtk_main_quit), G_OBJECT(janela));

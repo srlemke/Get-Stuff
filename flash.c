@@ -59,3 +59,14 @@ int install_flash()
 	}
 	return 0;
 }
+
+int flash()
+{
+	if(arch()){
+	        FILE *flash = fopen("/usr/lib64/mozilla/plugins/libflashplayer.so", "r");
+		        return (flash != 0);
+	}else{
+		FILE *flash = fopen("/usr/lib/mozilla/plugins/libflashplayer.so", "r");
+			return (flash != 0);
+	}
+}

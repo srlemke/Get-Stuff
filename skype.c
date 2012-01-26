@@ -6,15 +6,19 @@
 
 #define VERSION "2.2.0.35"
 
-int uninstall_skype()
+//return already installed or not
+int skype()
 {
-	chdir ("/opt");
-	unlink ("skype_static-"VERSION);
+	FILE *skype = fopen("/usr/bin/skype", "r");
+	return (skype != 0);
+}
+
+int uninstall_skype()
+{;
+	unlink ("/opt/skype_static-"VERSION".tar.bz2");
 
 	if (chdir("/opt/skype_static-"VERSION) == 0){
-
 		recursive_delete("/opt/skype_static-"VERSION);
-
 		unlink ("/usr/bin/skype");
 		unlink ("/usr/share/applications/skype.desktop");
 		unlink ("/usr/share/icons/skype.png");
@@ -28,12 +32,11 @@ int install_skype()
 
 	if (arch()){// if arch is 64bit
 		system ("edit-urpm-sources.pl --expert"); //tel user to enable 32bit medias
-		system ("urpmi libxscrnsaver1 libxv1 libxrender1 libXrandr2 libfreetype6 libfontconfig1 libglib2.0_0");
+		system ("urpmi libxscrnsaver1 libxv1 libxrender1 libxrandr2 libfreetype6 libfontconfig1 libglib2.0_0");
 	}
 
-	chdir ("/opt");
-	unlink ("skype_static-"VERSION".tar.bz2");
-	
+	unlink ("/opt/skype_static-"VERSION".tar.bz2");
+
 	wget();
 	system ("wget http://download.skype.com/linux/skype_static-"VERSION".tar.bz2");
 	system ("tar -jxvf /opt/skype_static-"VERSION".tar.bz2");
