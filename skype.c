@@ -38,6 +38,7 @@ int install_skype()
 	unlink ("/opt/skype_static-"VERSION".tar.bz2");
 
 	wget();
+	chdir ("/opt");
 	system ("wget http://download.skype.com/linux/skype_static-"VERSION".tar.bz2");
 	system ("tar -jxvf /opt/skype_static-"VERSION".tar.bz2");
 
