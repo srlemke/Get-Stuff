@@ -6,6 +6,7 @@
 void menu()
 {
 	printf ("Insert a number to: \n");
+
 	if(skype()){
 		printf("1 - Uninstall Skype\n");
 	}else{
@@ -17,7 +18,7 @@ void menu()
 	}else{
 		printf("2 - Install Flash\n");
 	}
-	
+
 	if(libfaad()){
 		printf("3 - Uninstall faad media codec\n");
 	}else{
@@ -54,7 +55,7 @@ int operations()
 			install_flash();
 		}
 	}
-	
+
 	if(choose == 3){
 		if(libfaad()){
 			uninstall_libfaad();
@@ -64,7 +65,8 @@ int operations()
 	}
 	printf ("Done!\n");
 
-		operations();
+	operations();
+	
 	return 0;
 }
 

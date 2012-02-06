@@ -14,7 +14,7 @@ int skype()
 }
 
 int uninstall_skype()
-{;
+{
 	unlink ("/opt/skype_static-"VERSION".tar.bz2");
 
 	if (chdir("/opt/skype_static-"VERSION) == 0){
