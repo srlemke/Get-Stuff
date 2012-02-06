@@ -17,6 +17,12 @@ void menu()
 	}else{
 		printf("2 - Install Flash\n");
 	}
+	
+	if(libfaad()){
+		printf("3 - Uninstall faad media codec\n");
+	}else{
+		printf("3 - Install faad media codec\n");
+	}
 
 	printf("Any other number to exit.\n");
 }
@@ -28,7 +34,7 @@ int operations()
 
 	scanf("%d", &choose);
 
-	if(choose != 1 && choose != 2){
+	if(choose != 1 && choose != 2 && choose != 3){
 		printf ("Bye bye.\n");
 		return 0;
 	}
@@ -46,6 +52,14 @@ int operations()
 			uninstall_flash();
 		}else{
 			install_flash();
+		}
+	}
+	
+	if(choose == 3){
+		if(libfaad()){
+			uninstall_libfaad();
+		}else{
+			install_libfaad();
 		}
 	}
 	printf ("Done!\n");

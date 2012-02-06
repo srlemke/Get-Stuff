@@ -4,7 +4,7 @@ LD	= gcc
 LDFLAGS	=
 LIBS	= `pkg-config gtk+-2.0 --libs`
 BIN	= get_stuff
-OBJS	= skype.o util.o main.o flash.o
+OBJS	= skype.o util.o main.o flash.o plugin.o
 
 .c.o:
 	$(CC) -c $(CFLAGS) -o $*.o $<
