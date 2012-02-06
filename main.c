@@ -17,34 +17,41 @@ void menu()
 	}else{
 		printf("2 - Install Flash\n");
 	}
+
+	printf("Any other number to exit.\n");
 }
 
 int main()
 {
-	int choose = 0;
-	menu();
+	if(geteuid() != 0){
+		printf ("Run as root\n");
+	}else{
 
-	scanf("%d", &choose);
-	if(choose != 1 || choose != 2){
-		printf ("Invalid number\n");
+		int choose = 0;
 		menu();
-	}
 
-	if(choose == 1){
-		if(skype()){
-			uninstall_skype();
-		}else{
-			install_skype();
+		scanf("%d", &choose);
+
+		if(choose != 1 && choose != 2){
+			printf ("Bye bye.\n");
+			return 0;
 		}
-	}
-	
-	if(choose == 2){
-		if(flash()){
-			uninstall_flash();
-		}else{
-			install_flash();
+
+		if(choose == 1){
+			if(skype()){
+				uninstall_skype();
+			}else{
+				install_skype();
+			}
+		}
+
+		if(choose == 2){
+			if(flash()){
+				uninstall_flash();
+			}else{
+				install_flash();
+			}
 		}
 	}
 	return 1;
 }
-
