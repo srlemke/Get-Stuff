@@ -11,7 +11,7 @@ void menu()
 	}else{
 		printf("1 - Install Skype\n");
 	}
-	
+
 	if(flash()){
 		printf("2 - Uninstall Flash\n");
 	}else{
@@ -21,37 +21,45 @@ void menu()
 	printf("Any other number to exit.\n");
 }
 
+int operations()
+{
+	int choose = 0;
+	menu();
+
+	scanf("%d", &choose);
+
+	if(choose != 1 && choose != 2){
+		printf ("Bye bye.\n");
+		return 0;
+	}
+
+	if(choose == 1){
+		if(skype()){
+			uninstall_skype();
+		}else{
+			install_skype();
+		}
+	}
+
+	if(choose == 2){
+		if(flash()){
+			uninstall_flash();
+		}else{
+			install_flash();
+		}
+	}
+	printf ("Done!\n");
+
+		operations();
+	return 0;
+}
+
 int main()
 {
 	if(geteuid() != 0){
 		printf ("Run as root\n");
 	}else{
-
-		int choose = 0;
-		menu();
-
-		scanf("%d", &choose);
-
-		if(choose != 1 && choose != 2){
-			printf ("Bye bye.\n");
-			return 0;
-		}
-
-		if(choose == 1){
-			if(skype()){
-				uninstall_skype();
-			}else{
-				install_skype();
-			}
-		}
-
-		if(choose == 2){
-			if(flash()){
-				uninstall_flash();
-			}else{
-				install_flash();
-			}
-		}
+		operations();
 	}
 	return 0;
 }
