@@ -36,8 +36,7 @@ int install_libfaad()
 
 int uninstall_libfaad()
 {
-	medias();
-	system ("urpmi gstreamer0.10-faad");
+	system ("urpmi.removemedia codecs; urpme gstreamer0.10-faad");
 	return 0;
 }
 
