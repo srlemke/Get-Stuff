@@ -13,7 +13,6 @@ int libfaad()
 		FILE *libfaad = fopen("/usr/lib/libfaad.so.2.0.0", "r");
 		return (libfaad != 0);
 	}
-	return 0;
 }
 
 void medias()
@@ -30,13 +29,22 @@ void medias()
 int install_libfaad()
 {
 	medias();
-	system ("urpmi gstreamer0.10-faad");
+	if(arch()){
+		system ("urpmi gstreamer0.10-faad lib64faad2_2-2.7");
+	}else{
+
+		system ("urpmi gstreamer0.10-faad libfaad2_2-2.7");
+	}
 	return 0;
 }
 
 int uninstall_libfaad()
 {
-	system ("urpmi.removemedia codecs; urpme gstreamer0.10-faad");
+	if(arch()){
+		system ("urpmi.removemedia codecs; urpme gstreamer0.10-faad lib64faad2_2");
+	}else{
+		system ("urpmi.removemedia codecs; urpme gstreamer0.10-faad libfaad2_2");
+	}
 	return 0;
 }
 
