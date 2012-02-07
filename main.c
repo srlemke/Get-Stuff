@@ -20,9 +20,9 @@ void menu()
 	}
 
 	if(libfaad()){
-		printf("3 - Uninstall faad media codec\n");
+		printf("3 - Uninstall faad audio codec(disables DI aac playbacks on clementine)\n");
 	}else{
-		printf("3 - Install faad media codec\n");
+		printf("3 - Install faad audio codec(enables DI aac playbacks on clementine)\n");
 	}
 
 	printf("Any other number to exit.\n");

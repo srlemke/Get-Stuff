@@ -1,8 +1,12 @@
 CC	= gcc
-CFLAGS	= -g -O0 -Wall `pkg-config gtk+-2.0 --cflags`
+#CFLAGS	= -g -O0 -Wall `pkg-config gtk+-2.0 --cflags`
+
+##removed gtk stuff
+CFLAGS	= -g -O0 -Wall
 LD	= gcc
 LDFLAGS	=
-LIBS	= `pkg-config gtk+-2.0 --libs`
+#removed gtk stuff
+#LIBS	= `pkg-config gtk+-2.0 --libs`
 BIN	= get_stuff
 OBJS	= skype.o util.o main.o flash.o plugin.o
 
