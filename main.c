@@ -25,7 +25,7 @@ void menu()
 		printf("3 - Install faad audio codec(enables DI aac playbacks on clementine)\n");
 	}
 
-	printf("Any other number to exit.\n");
+	printf("Any other key to exit.\n");
 }
 
 int operations()
