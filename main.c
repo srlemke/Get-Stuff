@@ -2,8 +2,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "common.h"
+#include <gtk/gtk.h>
 
-void menu()
+/*void menu()
 {
 	printf ("Insert a number to: \n");
 
@@ -28,12 +29,13 @@ void menu()
 	printf("Any other key to exit.\n");
 }
 
+
 int operations()
 {
-	int choose = 0;
+	char choose = 0;
 	menu();
 
-	scanf("%d", &choose);
+	scanf("%c", &choose);
 
 	if(choose != 1 && choose != 2 && choose != 3){
 		printf ("Bye bye.\n");
@@ -69,13 +71,50 @@ int operations()
 	
 	return 0;
 }
+*/
 
-int main()
+int main(int argc, char **argv)
 {
-	if(geteuid() != 0){
+	GtkBuilder *builder;
+	GtkWidget  *window;
+	GError     *error = NULL;
+
+	/* Init GTK+ */
+	gtk_init( &argc, &argv );
+
+	/* Create new GtkBuilder object */
+	builder = gtk_builder_new();
+	/* Load UI from file. If error occurs, report it and quit application.
+	 *      * Replace "tut.glade" with your saved project. */
+	if( ! gtk_builder_add_from_file( builder, "tut.glade", &error ) )
+	{
+		g_warning( "%s", error->message );
+		g_free( error );
+		return( 1 );
+	}
+
+	/* Get main window pointer from UI */
+	window = GTK_WIDGET( gtk_builder_get_object( builder, "window1" ) );
+
+	/* Connect signals */
+	gtk_builder_connect_signals( builder, NULL );
+
+	/* Destroy builder, since we don't need it anymore */
+	g_object_unref( G_OBJECT( builder ) );
+
+	/* Show window. All other widgets are automatically shown by GtkBuilder */
+	gtk_widget_show( window );
+
+	/* Start main loop */
+	gtk_main();
+
+
+/*	if(geteuid() != 0){
 		printf ("Run as root\n");
 	}else{
 		operations();
+		}
 	}
+*/	
 	return 0;
 }
