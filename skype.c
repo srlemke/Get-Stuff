@@ -24,19 +24,19 @@ int uninstall_skype()
 		unlink ("/usr/share/applications/skype.desktop");
 		unlink ("/usr/share/icons/skype.png");
 	}
-	uninstall_info();
+	message_error();
 	return 0;
 }
 
 int install_skype()
 {
-	int tmp;
+	//int tmp;
 	if(skype()){
 		return 0;
 	}else{
 		uninstall_skype();
 		if (arch()){// if arch is 64bit
-			medias_info();
+		//	medias_info();
 			system ("edit-urpm-sources.pl --expert"); //tel user to enable 32bit medias
 			system ("urpmi libxscrnsaver1 libxv1 libxrender1 libxrandr2 libfreetype6 libfontconfig1 libglib2.0_0");
 		}

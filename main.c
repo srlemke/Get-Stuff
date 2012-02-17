@@ -4,7 +4,20 @@
 #include "common.h"
 #include <gtk/gtk.h>
 
-int uninstall_info(GtkWidget *widget, gpointer window)
+void message_error()
+{
+	GtkWidget *dialog;
+
+	dialog = gtk_message_dialog_new(NULL,
+			GTK_DIALOG_DESTROY_WITH_PARENT,
+			GTK_MESSAGE_ERROR,
+			GTK_BUTTONS_CLOSE, "lalalala");
+
+	gtk_dialog_run(GTK_DIALOG(dialog));
+	gtk_widget_hide(dialog);
+}
+/*
+int uninstall_info(GtkWidget *widget, gpointer)
 {
 	GtkWidget *dialog;
 	dialog = gtk_message_dialog_new(GTK_WINDOW(window),
@@ -18,7 +31,7 @@ int uninstall_info(GtkWidget *widget, gpointer window)
 	return 0;
 }
 
-int install_info(GtkWidget *widget, gpointer window)
+int install_info(GtkWidget *widget, gpointer)
 {
 	GtkWidget *dialog;
 	dialog = gtk_message_dialog_new(GTK_WINDOW(window),
@@ -47,7 +60,7 @@ int medias_info(GtkWidget *widget, gpointer window)
 	gtk_widget_destroy(dialog);
 	return 0;
 }
-
+*/
 int main(int argc, char **argv)
 {
 	GtkBuilder *builder;
