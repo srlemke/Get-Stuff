@@ -2,3 +2,6 @@ This will install skype, flash and AAC codecs on Mandriva Linux 2011.
 This is intended as an C programming exercice, despite the base function
 seems to work, i don't recomend you to use it. This will someday become 
 a real and usefull code, but it's not the current state.
+
+Currently im trying to understand how GTK works, seems some kind of
+complicated, at last for me.
