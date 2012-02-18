@@ -4,17 +4,18 @@
 #include "common.h"
 #include <gtk/gtk.h>
 
-void message_error()
+int info_message(char *message)
 {
 	GtkWidget *dialog;
 
 	dialog = gtk_message_dialog_new(NULL,
 			GTK_DIALOG_DESTROY_WITH_PARENT,
-			GTK_MESSAGE_ERROR,
-			GTK_BUTTONS_CLOSE, "lalalala");
+			GTK_MESSAGE_INFO,
+			GTK_BUTTONS_CLOSE, "%s", message);
 
 	gtk_dialog_run(GTK_DIALOG(dialog));
 	gtk_widget_hide(dialog);
+	return 0;
 }
 /*
 int uninstall_info(GtkWidget *widget, gpointer)

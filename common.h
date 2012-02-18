@@ -13,3 +13,4 @@ void wget(void);
 int flash(void);
 int libfaad(void);
 int skype(void);
+int info_message(char *);
