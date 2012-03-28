@@ -16,22 +16,28 @@ int skype()
 
 int uninstall_skype()
 {
-	unlink ("/opt/skype_static-"VERSION".tar.bz2");
+	if(!skype()){
+		info_message("Skype is currently not installe, nothing to remove.");
+		return 0;
+	}else{
+		unlink ("/opt/skype_static-"VERSION".tar.bz2");
 
-	if (chdir("/opt/skype_static-"VERSION) == 0){
-		recursive_delete("/opt/skype_static-"VERSION);
-		unlink ("/usr/bin/skype");
-		unlink ("/usr/share/applications/skype.desktop");
-		unlink ("/usr/share/icons/skype.png");
+		if (chdir("/opt/skype_static-"VERSION) == 0){
+			recursive_delete("/opt/skype_static-"VERSION);
+			unlink ("/usr/bin/skype");
+			unlink ("/usr/share/applications/skype.desktop");
+			unlink ("/usr/share/icons/skype.png");
+		}
+		info_message("Skype sucesfully uninstalled!\n");
+		return 0;
 	}
-	info_message("Skype sucesfully uninstalled!\n");
-	return 0;
 }
 
 int install_skype()
 {
 	//int tmp;
 	if(skype()){
+		info_message("Skype is already installed.");
 		return 0;
 	}else{
 			info_message("First i will uninstall old versions of skype that\n maybe already installed.");
