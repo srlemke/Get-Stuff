@@ -8,8 +8,8 @@ You will need have Make installed(urpmi make).
 Download the tar.bz2 file, untar, run make and run ./Get_Stuf
 Just paste the following commands on terminal, don't forget to hit enter :)
 
-wget https://github.com/bedi1982/Get-Stuff/blob/master/Get-Stuff-0.2.tar.bz2
-tar -xvf Get-Stuff-0.2.tar.bz2
+wget https://github.com/downloads/bedi1982/Get-Stuff/Get-Stuff.tar.bz2
+tar -xvf Get-Stuff.tar.bz2
 cd Get-Stuff/
 make
 ./get_stuff
