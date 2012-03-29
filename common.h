@@ -1,5 +1,5 @@
 int install_skype(void);
-int uninstall_skype(void);
+int uninstall_skype(int);
 
 int install_flash(void);
 int uninstall_flash(void);

@@ -14,10 +14,18 @@ int skype()
 	return (skype != 0);
 }
 
-int uninstall_skype()
+int uninstall_skype(int i)
 {
 	if(!skype()){
-		info_message("Skype is currently not installed, nothing to remove.");
+		if(i == 0){
+			return 0;
+		}else{
+			if(!skype()){
+				info_message("Nothing to uninstall.");
+			}else{
+				info_message("Deinstallation Complete.");
+			}
+		}
 		return 0;
 	}else{
 		unlink ("/opt/skype_static-"VERSION".tar.bz2");
@@ -28,49 +36,45 @@ int uninstall_skype()
 			unlink ("/usr/share/applications/skype.desktop");
 			unlink ("/usr/share/icons/skype.png");
 		}
-		info_message("Skype sucesfully uninstalled!\n");
+		info_message("Deinstallation complete!\n");
 		return 0;
 	}
 }
 
-int install_skype(){
+int spawn(char *cmd){
+	
 	char *myargv[5];
 	GError *error = NULL;
 	GPid pid;	
 
 	myargv[0] = "/bin/sh";
 	myargv[1] = "-c";
-	myargv[2] = "edit-urpm-sources.pl --expert";
+	myargv[2] = cmd;
 	myargv[3] = NULL;
 
-	//int tmp;
+	g_spawn_async(NULL, myargv, NULL, G_SPAWN_DO_NOT_REAP_CHILD,
+			NULL, NULL, &pid, &error);
+	return 0;
+}
+
+int install_skype(){
+	
 	if(skype()){
 		info_message("Skype is already installed.");
 		return 0;
 	}else{
-		info_message("First i will uninstall old versions of skype that\n maybe already installed.");
-		uninstall_skype();
-		if (arch()){
-			// if arch is 64bit
-			//----------------------------------------------------------------
-
-
-			g_spawn_async(NULL, myargv, NULL, G_SPAWN_DO_NOT_REAP_CHILD,
-					NULL, NULL, &pid, &error);
+		uninstall_skype(0);
+		if (!arch()){
 
 			info_message("You are on a 64bit system, on the next screen i need\nyou to enable the Main32 and Main32 Updates medias, i'm a smart software and i could do it myself, but i like you to know everything whats being done here.");
 
+			spawn("edit-urpm-sources.pl --expert");
+			
 			info_message("Time to install some extra dependencies, only needed on 64bit systems");
 
-			myargv[2] = "urpmi libxscrnsaver1 libxv1 libxrender1 libxrandr2 libfreetype6 libfontconfig1 libglib2.0_0";
-
-			g_spawn_async(NULL, myargv, NULL, G_SPAWN_DO_NOT_REAP_CHILD,
-					NULL, NULL, &pid, &error);
-
-			info_message("Press ok to start skype download, this may take a while. Go grab some coffee");
+			spawn("urpmi libxscrnsaver1 libxv1 libxrender1 libxrandr2 libfreetype6 libfontconfig1 libglib2.0_0");
 		}
-		//------------------------------------------------------
-
+			info_message("Press ok to start skype download, this may take a while and depends on your bandwitch speed. Go grab some coffee. Press ok and wait this window close.");
 
 		unlink ("/opt/skype_static-"VERSION".tar.bz2");
 
@@ -79,12 +83,11 @@ int install_skype(){
 
 		system ("wget http://download.skype.com/linux/skype_static-"VERSION".tar.bz2");
 		system ("tar -jxvf /opt/skype_static-"VERSION".tar.bz2");
-		info_message("The installation is in progress... Downloading the skype tar.bz2 file...\n");
 
 		symlink ("/opt/skype_static-"VERSION"/skype", "/usr/bin/skype");
 		symlink ("/opt/skype_static-"VERSION"/skype.desktop", "/usr/share/applications/skype.desktop");
 		symlink ("/opt/skype_static-"VERSION"/icons/SkypeBlue_48x48.png", "/usr/share/icons/skype.png");
-		info_message("Done, skype installed\n");
+		info_message("Installation Done! :]\n");
 		return 0;
 	}
 }
