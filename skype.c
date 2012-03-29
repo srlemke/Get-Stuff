@@ -28,8 +28,9 @@ int uninstall_skype(int i)
 		}
 		return 0;
 	}else{
-		unlink ("/opt/skype_static-"VERSION".tar.bz2");
+		system("urpme skype"); //Just in case//
 
+		unlink ("/opt/skype_static-"VERSION".tar.bz2");
 		if (chdir("/opt/skype_static-"VERSION) == 0){
 			recursive_delete("/opt/skype_static-"VERSION);
 			unlink ("/usr/bin/skype");
@@ -42,7 +43,7 @@ int uninstall_skype(int i)
 }
 
 int spawn(char *cmd){
-	
+
 	char *myargv[5];
 	GError *error = NULL;
 	GPid pid;	
@@ -58,23 +59,20 @@ int spawn(char *cmd){
 }
 
 int install_skype(){
-	
+
 	if(skype()){
 		info_message("Skype is already installed.");
 		return 0;
 	}else{
 		uninstall_skype(0);
-		if (!arch()){
+		if (arch()){
 
-			info_message("You are on a 64bit system, on the next screen i need\nyou to enable the Main32 and Main32 Updates medias, i'm a smart software and i could do it myself, but i like you to know everything whats being done here.");
-
+			info_message("You are on a 64bit system, on the next screen i need\nyou to enable the Main32 and Main32 Update medias.");
 			spawn("edit-urpm-sources.pl --expert");
-			
 			info_message("Time to install some extra dependencies, only needed on 64bit systems");
-
 			spawn("urpmi libxscrnsaver1 libxv1 libxrender1 libxrandr2 libfreetype6 libfontconfig1 libglib2.0_0");
 		}
-			info_message("Press ok to start skype download, this may take a while and depends on your bandwitch speed. Go grab some coffee. Press ok and wait this window close.");
+		info_message("Press ok to start skype download, this may take a while and depends on your bandwitch speed. Go grab some coffee. Press ok and wait this window close.");
 
 		unlink ("/opt/skype_static-"VERSION".tar.bz2");
 
