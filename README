@@ -6,10 +6,12 @@ This is a graphical insterface to install skype on Mandriva 2011.
 INSTALL
 You will need have Make installed(urpmi make).
 Download the tar.bz2 file, untar, run make and run ./Get_Stuf
-Just paste the following commands on terminal, don't forget to hit enter :)
+Just paste the following 4 commands on terminal:
 
 wget https://github.com/downloads/bedi1982/Get-Stuff/Get-Stuff.tar.bz2
 tar -xvf Get-Stuff.tar.bz2
 cd Get-Stuff/
 make
+
+Now, since we are copying the files to /opt(which requires root), you need to login as root, then run:
 ./get_stuff
