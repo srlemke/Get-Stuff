@@ -70,7 +70,7 @@ int install_skype(){
 			info_message("You are on a 64bit system, on the next screen i need\nyou to enable the Main32 and Main32 Update medias.");
 			spawn("edit-urpm-sources.pl --expert");
 			info_message("Time to install some extra dependencies, only needed on 64bit systems");
-			spawn("urpmi libxscrnsaver1 libxv1 libxrender1 libxrandr2 libfreetype6 libfontconfig1 libglib2.0_0");
+			spawn("urpmi libxscrnsaver1 libxv1 libxrender1 libxrandr2 libfreetype6 libfontconfig1 libglib2.0_0  libgthread2.0_0 libsm6 libxi6");
 		}
 		info_message("Press ok to start skype download, this may take a while and depends on your bandwitch speed. Go grab some coffee. Press ok and wait this window close.");
 
